@@ -13,7 +13,8 @@ def create_metadata(data_dir):
     df_meta['class1'] = df_meta.filepath.str.extract(r'E:/Data/kfood\\([^\\]+)')
     df_meta['class2'] = df_meta.filepath.str.extract(r'E:/Data/kfood\\[^\\]+\\([^\\]+)')
     df_meta['class3'] = df_meta.filepath.str.extract(r'E:/Data/kfood\\[^\\]+\\[^\\]+\\([^\\]+)')
-    df_meta = df_meta.loc[:,['class1','class2','class3','filepath']]
+    df_meta['filetype'] = df_meta.filepath.str.extract(r'\.([^\.]+$)')
+    df_meta = df_meta.loc[:,['filetype','class1','class2','class3','filepath']]
     df_meta.to_csv('jgryu/data/meta.csv', index=False)
 
 
